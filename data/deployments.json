@@ -1,0 +1,72 @@
+ [
+  {
+    "id": "bot_001",
+    "user_id": "demo_001",
+    "name": "Music Discord Bot",
+    "type": "discord",
+    "status": "online",
+    "token": "demo_token_xyz123",
+    "config": {
+      "prefix": "!",
+      "admins": ["admin"],
+      "autoStart": true
+    },
+    "memory_limit": "256MB",
+    "uptime": 456789,
+    "created_at": 1704067200,
+    "updated_at": 1704153600,
+    "logs": [
+      {
+        "timestamp": 1704153600,
+        "action": "start",
+        "message": "Bot started successfully"
+      }
+    ]
+  },
+  {
+    "id": "bot_002",
+    "user_id": "demo_001",
+    "name": "Telegram News Bot",
+    "type": "telegram",
+    "status": "offline",
+    "token": "demo_token_abc456",
+    "config": {
+      "news_source": "bbc",
+      "update_interval": 3600
+    },
+    "memory_limit": "128MB",
+    "uptime": 123456,
+    "created_at": 1703980800,
+    "updated_at": 1704067200,
+    "logs": [
+      {
+        "timestamp": 1704067200,
+        "action": "stop",
+        "message": "Bot stopped by user"
+      }
+    ]
+  },
+  {
+    "id": "bot_003",
+    "user_id": "demo_002",
+    "name": "WhatsApp Assistant",
+    "type": "whatsapp",
+    "status": "pending",
+    "token": "demo_token_def789",
+    "config": {
+      "welcome_message": "Hello! How can I help?",
+      "auto_reply": true
+    },
+    "memory_limit": "512MB",
+    "uptime": 0,
+    "created_at": 1704153600,
+    "updated_at": 1704153600,
+    "logs": [
+      {
+        "timestamp": 1704153600,
+        "action": "deploy",
+        "message": "Deployment in progress"
+      }
+    ]
+  }
+ ]
