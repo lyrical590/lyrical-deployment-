@@ -3,237 +3,528 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Nyoni Bot Panel</title>
+    <title>Dashboard - Nyoni Bot</title>
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="panel.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .dashboard-header {
+            background: var(--dark);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            border: 1px solid rgba(124, 58, 237, 0.2);
+        }
+        
+        .user-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .user-details h2 {
+            margin-bottom: 5px;
+        }
+        
+        .user-details p {
+            color: var(--gray);
+        }
+        
+        .logout-btn {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            padding: 10px 20px;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+        
+        .logout-btn:hover {
+            background: rgba(239, 68, 68, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: var(--dark);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            transition: var(--transition);
+        }
+        
+        .stat-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .stat-card i {
+            font-size: 2rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+        
+        .stat-card h3 {
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .stat-card p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .bots-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .deploy-btn {
+            background: var(--gradient);
+            color: white;
+            padding: 10px 20px;
+            border-radius: var(--border-radius-sm);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+        
+        .deploy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .action-btn {
+            background: var(--dark);
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            padding: 20px;
+            border-radius: var(--border-radius-sm);
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .action-btn:hover {
+            border-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .action-btn i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .action-btn span {
+            display: block;
+            font-weight: 600;
+            color: var(--light);
+        }
+        
+        .dashboard-footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid rgba(124, 58, 237, 0.2);
+            color: var(--gray);
+            margin-top: 50px;
+        }
+        
+        .welcome-message {
+            background: var(--gradient);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            color: white;
+            text-align: center;
+        }
+        
+        .welcome-message h1 {
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+    </style>
 </head>
 <body class="panel-page">
     <div id="particles-js"></div>
     
-    <div class="panel-container dashboard-container">
+    <div class="panel-container">
+        <!-- Dashboard Header -->
         <div class="dashboard-header">
-            <div class="dashboard-nav">
-                <div class="logo">
-                    <i class="fas fa-robot"></i>
-                    <span>Nyoni<span class="logo-highlight">Bot</span> Dashboard</span>
+            <div class="user-info">
+                <div class="user-details">
+                    <h2 id="username">Loading...</h2>
+                    <p id="userEmail">user@example.com</p>
                 </div>
-                <div class="user-menu">
-                    <div class="user-info">
-                        <span id="username">Loading...</span>
-                        <small id="user-email">user@example.com</small>
-                    </div>
-                    <button class="btn-logout" id="logout-btn">
-                        <i class="fas fa-sign-out-alt"></i> Logout
-                    </button>
-                </div>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Toka
+                </button>
             </div>
         </div>
         
-        <div class="dashboard-stats">
+        <!-- Welcome Message -->
+        <div class="welcome-message">
+            <h1>Karibu Nyoni Bot Dashboard</h1>
+            <p>Anzisha, simamia na udhibiti bots zako zote kutoka hapa</p>
+        </div>
+        
+        <!-- Stats -->
+        <div class="stats-grid">
             <div class="stat-card">
                 <i class="fas fa-robot"></i>
-                <h3 id="total-bots">4</h3>
-                <p>Total Bots</p>
+                <h3 id="totalBots">0</h3>
+                <p>Bots Zote</p>
             </div>
             <div class="stat-card">
-                <i class="fas fa-check-circle"></i>
-                <h3 id="active-bots">2</h3>
-                <p>Active Bots</p>
-            </div>
-            <div class="stat-card">
-                <i class="fas fa-clock"></i>
-                <h3>99.9%</h3>
-                <p>Uptime</p>
+                <i class="fas fa-play-circle"></i>
+                <h3 id="activeBots">0</h3>
+                <p>Bots Zinazofanya Kazi</p>
             </div>
             <div class="stat-card">
                 <i class="fas fa-server"></i>
-                <h3>640MB</h3>
-                <p>Memory Used</p>
+                <h3 id="planType">Free</h3>
+                <p>Mpango Wako</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-clock"></i>
+                <h3>24/7</h3>
+                <p>Uptime Guarantee</p>
             </div>
         </div>
         
-        <div class="dashboard-content">
-            <div class="section-title">
-                <h2>Your Bots</h2>
-                <a href="#deploy" class="btn-primary">
-                    <i class="fas fa-plus"></i> Deploy New Bot
-                </a>
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <div class="action-btn" onclick="deployNewBot()">
+                <i class="fas fa-plus"></i>
+                <span>Tengeneza Bot Mpya</span>
             </div>
-            
-            <div class="bots-grid">
-                <!-- Bots will be loaded dynamically -->
-                <div class="loading">
-                    <i class="fas fa-spinner fa-spin"></i> Loading bots...
-                </div>
+            <div class="action-btn" onclick="viewTemplates()">
+                <i class="fas fa-copy"></i>
+                <span>Angalia Templates</span>
             </div>
-            
-            <div class="section-title" id="deploy">
-                <h2>Deploy New Bot</h2>
+            <div class="action-btn" onclick="openDocs()">
+                <i class="fas fa-book"></i>
+                <span>Soma Documentation</span>
             </div>
-            
-            <form class="deploy-form" id="deploy-form">
+            <div class="action-btn" onclick="upgradePlan()">
+                <i class="fas fa-star"></i>
+                <span>Boresha Mpango</span>
+            </div>
+        </div>
+        
+        <!-- Your Bots Section -->
+        <div class="section-title">
+            <h2>Bots Zako</h2>
+            <a href="#" class="deploy-btn" onclick="deployNewBot()">
+                <i class="fas fa-plus"></i> Tengeneza Bot Mpya
+            </a>
+        </div>
+        
+        <div class="bots-grid" id="botsGrid">
+            <!-- Bots will be loaded here -->
+            <div class="loading">
+                <i class="fas fa-spinner fa-spin"></i> Inapakia bots...
+            </div>
+        </div>
+        
+        <!-- Quick Deploy Form -->
+        <div class="deploy-form" id="deployForm" style="display: none; margin-top: 30px;">
+            <h3>Tengeneza Bot Mpya</h3>
+            <form onsubmit="submitDeploy(event)">
                 <div class="form-group">
-                    <label for="bot-name">
-                        <i class="fas fa-robot"></i> Bot Name
-                    </label>
-                    <input type="text" id="bot-name" placeholder="My Awesome Bot" required>
+                    <label for="botName">Jina la Bot</label>
+                    <input type="text" id="botName" placeholder="Mfano: Music Bot" required>
                 </div>
                 
                 <div class="form-group">
-                    <label for="bot-type">
-                        <i class="fas fa-code-branch"></i> Bot Type
-                    </label>
-                    <select id="bot-type" required>
-                        <option value="">Select bot type</option>
+                    <label for="botType">Aina ya Bot</label>
+                    <select id="botType" required>
+                        <option value="">Chagua aina...</option>
                         <option value="discord">Discord Bot</option>
                         <option value="telegram">Telegram Bot</option>
                         <option value="whatsapp">WhatsApp Bot</option>
                         <option value="slack">Slack Bot</option>
-                        <option value="custom">Custom Bot</option>
                     </select>
                 </div>
                 
                 <div class="form-group">
-                    <label for="bot-token">
-                        <i class="fas fa-key"></i> Bot Token (Optional)
-                    </label>
-                    <input type="password" id="bot-token" placeholder="Enter your bot token if you have one">
+                    <label for="botCode">Code (Optional)</label>
+                    <textarea id="botCode" rows="4" placeholder="Weka code yako hapa au tumia templates yetu..."></textarea>
                 </div>
                 
-                <div class="form-group">
-                    <label>
-                        <i class="fas fa-file-upload"></i> Upload Bot Files
-                    </label>
-                    <div class="file-upload">
-                        <i class="fas fa-cloud-upload-alt"></i>
-                        <p>Drag & drop your bot files here</p>
-                        <p class="file-names">or click to browse</p>
-                        <input type="file" id="bot-files" multiple accept=".js,.py,.json,.txt,.zip">
-                    </div>
+                <div class="form-buttons">
+                    <button type="button" class="btn-secondary" onclick="cancelDeploy()">
+                        <i class="fas fa-times"></i> Batilisha
+                    </button>
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-rocket"></i> Tengeneza Sasa
+                    </button>
                 </div>
-                
-                <div class="form-group">
-                    <label for="bot-config">
-                        <i class="fas fa-cog"></i> Configuration (JSON)
-                    </label>
-                    <textarea id="bot-config" rows="4" placeholder='{
-  "prefix": "!",
-  "admins": ["your_id"],
-  "settings": {
-    "autoStart": true,
-    "restartOnCrash": true
-  }
-}'></textarea>
-                </div>
-                
-                <button type="submit" class="btn-submit">
-                    <i class="fas fa-rocket"></i> Deploy Bot
-                </button>
             </form>
         </div>
         
-        <div class="panel-footer">
-            <p>Need help? <a href="#">Read our documentation</a> or <a href="#">contact support</a></p>
+        <!-- Footer -->
+        <div class="dashboard-footer">
+            <p>Nyoni Bot Panel &copy; 2024 | <span id="currentYear"></span></p>
+            <p>Need help? <a href="#" style="color: var(--primary);">Contact Support</a></p>
         </div>
     </div>
-    
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="../assets/js/particles.js"></script>
+
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="loading-spinner">
+        <div class="spinner"></div>
+        <p>Inafanya kazi...</p>
+    </div>
+
     <script src="panel.js"></script>
     <script>
-        // Dashboard specific initialization
+        // Set current year
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        
+        // Load user data
         document.addEventListener('DOMContentLoaded', function() {
-            // Update stats after bots are loaded
-            setTimeout(() => {
-                document.getElementById('total-bots').textContent = '4';
-                document.getElementById('active-bots').textContent = '2';
-            }, 1000);
+            const user = JSON.parse(localStorage.getItem('nyoni_user') || sessionStorage.getItem('nyoni_user'));
             
-            // Add styles for loading
-            const style = document.createElement('style');
-            style.textContent = `
-                .loading {
-                    text-align: center;
-                    padding: 40px;
-                    grid-column: 1 / -1;
-                    color: var(--gray);
-                }
-                
-                .loading i {
-                    margin-right: 10px;
-                }
-                
-                .dashboard-nav {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                }
-                
-                .user-menu {
-                    display: flex;
-                    align-items: center;
-                    gap: 20px;
-                }
-                
-                .user-info {
-                    text-align: right;
-                }
-                
-                .user-info span {
-                    display: block;
-                    font-weight: 600;
-                }
-                
-                .user-info small {
-                    color: var(--gray);
-                    font-size: 0.9rem;
-                }
-                
-                .btn-logout {
-                    background: rgba(239, 68, 68, 0.2);
-                    color: #EF4444;
-                    border: 1px solid rgba(239, 68, 68, 0.3);
-                    padding: 8px 20px;
-                    border-radius: var(--border-radius-sm);
-                    cursor: pointer;
-                    transition: var(--transition);
-                    display: flex;
-                    align-items: center;
-                    gap: 8px;
-                }
-                
-                .btn-logout:hover {
-                    background: rgba(239, 68, 68, 0.3);
-                    transform: translateY(-2px);
-                }
-                
-                .section-title {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    margin: 40px 0 20px;
-                }
-                
-                select, textarea {
-                    width: 100%;
-                    padding: 15px;
-                    background: var(--darker);
-                    border: 2px solid rgba(124, 58, 237, 0.2);
-                    border-radius: var(--border-radius-sm);
-                    color: var(--light);
-                    font-size: 1rem;
-                    transition: var(--transition);
-                }
-                
-                select:focus, textarea:focus {
-                    outline: none;
-                    border-color: var(--primary);
-                    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
-                }
-            `;
-            document.head.appendChild(style);
+            if (!user) {
+                window.location.href = 'index.html';
+                return;
+            }
+            
+            // Update user info
+            document.getElementById('username').textContent = user.username;
+            document.getElementById('userEmail').textContent = user.email;
+            document.getElementById('planType').textContent = user.plan || 'Free';
+            
+            // Load bots
+            setTimeout(loadBots, 1000);
         });
+        
+        function loadBots() {
+            const users = JSON.parse(localStorage.getItem('nyoni_users') || '[]');
+            const currentUser = JSON.parse(localStorage.getItem('nyoni_user') || sessionStorage.getItem('nyoni_user'));
+            const user = users.find(u => u.id === currentUser?.id);
+            
+            const botsGrid = document.getElementById('botsGrid');
+            
+            if (!user || !user.bots || user.bots.length === 0) {
+                botsGrid.innerHTML = `
+                    <div class="no-bots">
+                        <i class="fas fa-robot"></i>
+                        <h3>Huna bots bado</h3>
+                        <p>Anza kwa kubonyeza "Tengeneza Bot Mpya" hapo juu</p>
+                        <button class="deploy-btn" onclick="deployNewBot()" style="margin-top: 20px;">
+                            <i class="fas fa-plus"></i> Tengeneza Bot ya Kwanza
+                        </button>
+                    </div>
+                `;
+                document.getElementById('totalBots').textContent = '0';
+                document.getElementById('activeBots').textContent = '0';
+                return;
+            }
+            
+            // Update stats
+            document.getElementById('totalBots').textContent = user.bots.length;
+            const activeBots = user.bots.filter(bot => bot.status === 'online').length;
+            document.getElementById('activeBots').textContent = activeBots;
+            
+            // Display bots
+            botsGrid.innerHTML = user.bots.map(bot => `
+                <div class="bot-card">
+                    <div class="bot-header">
+                        <div>
+                            <h3>${bot.name}</h3>
+                            <p><i class="fab fa-${bot.type}"></i> ${bot.type.charAt(0).toUpperCase() + bot.type.slice(1)} Bot</p>
+                        </div>
+                        <span class="bot-status status-${bot.status}">${bot.status.toUpperCase()}</span>
+                    </div>
+                    <div class="bot-info">
+                        <p><i class="fas fa-clock"></i> Uptime: ${bot.uptime || '0d 0h'}</p>
+                        <p><i class="fas fa-calendar"></i> Created: ${bot.created || 'Today'}</p>
+                        <p><i class="fas fa-memory"></i> Memory: ${bot.memory || '128MB'}</p>
+                    </div>
+                    <div class="bot-actions">
+                        <button class="btn-action" onclick="controlBot('${bot.id}', 'start')" ${bot.status === 'online' ? 'disabled' : ''}>
+                            <i class="fas fa-play"></i> Anzisha
+                        </button>
+                        <button class="btn-action" onclick="controlBot('${bot.id}', 'stop')" ${bot.status !== 'online' ? 'disabled' : ''}>
+                            <i class="fas fa-stop"></i> Simamisha
+                        </button>
+                        <button class="btn-action" onclick="controlBot('${bot.id}', 'restart')">
+                            <i class="fas fa-redo"></i> Anzisha Upya
+                        </button>
+                        <button class="btn-action" onclick="deleteBot('${bot.id}')">
+                            <i class="fas fa-trash"></i> Futa
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function deployNewBot() {
+            document.getElementById('deployForm').style.display = 'block';
+            window.scrollTo({ top: document.getElementById('deployForm').offsetTop - 50, behavior: 'smooth' });
+        }
+        
+        function cancelDeploy() {
+            document.getElementById('deployForm').style.display = 'none';
+            document.getElementById('botName').value = '';
+            document.getElementById('botType').value = '';
+            document.getElementById('botCode').value = '';
+        }
+        
+        function submitDeploy(event) {
+            event.preventDefault();
+            
+            const botName = document.getElementById('botName').value;
+            const botType = document.getElementById('botType').value;
+            const botCode = document.getElementById('botCode').value;
+            
+            if (!botName || !botType) {
+                alert('Tafadhali jaza jina na aina ya bot');
+                return;
+            }
+            
+            // Show loading
+            document.getElementById('loadingSpinner').style.display = 'flex';
+            
+            // Simulate deployment
+            setTimeout(() => {
+                // Get current user
+                const users = JSON.parse(localStorage.getItem('nyoni_users') || '[]');
+                const currentUser = JSON.parse(localStorage.getItem('nyoni_user') || sessionStorage.getItem('nyoni_user'));
+                const userIndex = users.findIndex(u => u.id === currentUser.id);
+                
+                if (userIndex !== -1) {
+                    // Create new bot
+                    const newBot = {
+                        id: 'bot_' + Date.now(),
+                        name: botName,
+                        type: botType,
+                        status: 'offline',
+                        uptime: '0d 0h',
+                        created: new Date().toLocaleDateString(),
+                        memory: '128MB'
+                    };
+                    
+                    // Add to user's bots
+                    if (!users[userIndex].bots) {
+                        users[userIndex].bots = [];
+                    }
+                    users[userIndex].bots.push(newBot);
+                    
+                    // Save to localStorage
+                    localStorage.setItem('nyoni_users', JSON.stringify(users));
+                    
+                    // Show success
+                    alert('✅ Bot imetengenezwa!');
+                    
+                    // Reset form and hide
+                    cancelDeploy();
+                    
+                    // Reload bots
+                    loadBots();
+                }
+                
+                // Hide loading
+                document.getElementById('loadingSpinner').style.display = 'none';
+            }, 2000);
+        }
+        
+        function controlBot(botId, action) {
+            const users = JSON.parse(localStorage.getItem('nyoni_users') || '[]');
+            const currentUser = JSON.parse(localStorage.getItem('nyoni_user') || sessionStorage.getItem('nyoni_user'));
+            const userIndex = users.findIndex(u => u.id === currentUser.id);
+            
+            if (userIndex !== -1 && users[userIndex].bots) {
+                const botIndex = users[userIndex].bots.findIndex(b => b.id === botId);
+                if (botIndex !== -1) {
+                    switch(action) {
+                        case 'start':
+                            users[userIndex].bots[botIndex].status = 'online';
+                            alert('✅ Bot imeanzishwa!');
+                            break;
+                        case 'stop':
+                            users[userIndex].bots[botIndex].status = 'offline';
+                            alert('⏹️ Bot imesimamishwa');
+                            break;
+                        case 'restart':
+                            users[userIndex].bots[botIndex].status = 'restarting';
+                            setTimeout(() => {
+                                users[userIndex].bots[botIndex].status = 'online';
+                                localStorage.setItem('nyoni_users', JSON.stringify(users));
+                                loadBots();
+                                alert('🔄 Bot imeanzishwa upya!');
+                            }, 1000);
+                            break;
+                    }
+                    
+                    localStorage.setItem('nyoni_users', JSON.stringify(users));
+                    loadBots();
+                }
+            }
+        }
+        
+        function deleteBot(botId) {
+            if (!confirm('Una hakika unataka kufuta bot hii?')) return;
+            
+            const users = JSON.parse(localStorage.getItem('nyoni_users') || '[]');
+            const currentUser = JSON.parse(localStorage.getItem('nyoni_user') || sessionStorage.getItem('nyoni_user'));
+            const userIndex = users.findIndex(u => u.id === currentUser.id);
+            
+            if (userIndex !== -1 && users[userIndex].bots) {
+                users[userIndex].bots = users[userIndex].bots.filter(b => b.id !== botId);
+                localStorage.setItem('nyoni_users', JSON.stringify(users));
+                alert('🗑️ Bot imefutwa');
+                loadBots();
+            }
+        }
+        
+        function viewTemplates() {
+            alert('📁 Inafungua bot templates...');
+        }
+        
+        function openDocs() {
+            window.open('https://docs.nyonibot.com', '_blank');
+        }
+        
+        function upgradePlan() {
+            alert('⭐ Inafungua ukurasa wa kuboresha mpango...');
+        }
+        
+        // Logout function
+        window.logout = function() {
+            if (confirm('Una hakika unataka kutoka?')) {
+                localStorage.removeItem('nyoni_user');
+                localStorage.removeItem('nyoni_token');
+                sessionStorage.removeItem('nyoni_user');
+                window.location.href = 'index.html';
+            }
+        };
     </script>
 </body>
-  </html>
+ </html>
