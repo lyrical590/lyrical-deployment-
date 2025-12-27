@@ -1,0 +1,68 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>Test Login</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        input { display: block; margin: 10px 0; padding: 10px; width: 300px; }
+        button { padding: 10px 20px; background: #7C3AED; color: white; border: none; }
+    </style>
+</head>
+<body>
+    <h2>Test Login Directly:</h2>
+    
+    <h3>Demo Account 1:</h3>
+    <p>Email: admin@nyonibot.com</p>
+    <p>Password: admin123</p>
+    
+    <h3>Demo Account 2:</h3>
+    <p>Email: test@example.com</p>
+    <p>Password: test123</p>
+    
+    <h3>Or create new account:</h3>
+    <p>Any email/password will work locally</p>
+    
+    <button onclick="window.location.href='panel/index.html'">
+        Go to Login Page
+    </button>
+    
+    <button onclick="directLogin()">
+        Login Automatically
+    </button>
+    
+    <script>
+        function directLogin() {
+            // Create demo user if not exists
+            if(!localStorage.getItem('nyoni_users')) {
+                localStorage.setItem('nyoni_users', JSON.stringify([
+                    {
+                        id: 'auto_user',
+                        username: 'testuser',
+                        email: 'test@test.com',
+                        password: 'test123',
+                        plan: 'free',
+                        maxBots: 5,
+                        createdAt: new Date().toISOString(),
+                        bots: []
+                    }
+                ]));
+            }
+            
+            // Auto login
+            const userData = {
+                id: 'auto_user',
+                username: 'testuser',
+                email: 'test@test.com',
+                plan: 'free',
+                loggedIn: true
+            };
+            
+            localStorage.setItem('nyoni_user', JSON.stringify(userData));
+            localStorage.setItem('nyoni_token', 'demo_token_' + Date.now());
+            
+            alert('✅ Auto-login successful!');
+            window.location.href = 'panel/dashboard.html';
+        }
+    </script>
+</body>
+</html>
