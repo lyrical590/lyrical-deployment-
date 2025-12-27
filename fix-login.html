@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Emergency Login Fix</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+        
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            width: 350px;
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            color: #7C3AED;
+            margin-bottom: 20px;
+        }
+        
+        h2 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        
+        button {
+            width: 100%;
+            padding: 15px;
+            background: #7C3AED;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        
+        button:hover {
+            background: #6D28D9;
+        }
+        
+        .demo {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            text-align: left;
+        }
+        
+        .success {
+            color: #10B981;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <div class="logo">
+            🤖 Nyoni Bot
+        </div>
+        
+        <h2>Emergency Login</h2>
+        
+        <div id="loginForm">
+            <input type="text" id="username" placeholder="Username or Email" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button onclick="login()">Login / Register</button>
+        </div>
+        
+        <div class="demo">
+            <strong>Demo Accounts:</strong><br>
+            1. admin@nyonibot.com / admin123<br>
+            2. test@example.com / test123<br>
+            <em>Or use any email to auto-register</em>
+        </div>
+        
+        <div id="message" class="success"></div>
+    </div>
+
+    <script>
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if(!username || !password) {
+                showMessage('Please enter username and password', 'red');
+                return;
+            }
+            
+            // Create user data
+            const userData = {
+                id: 'user_' + Date.now(),
+                username: username.includes('@') ? username.split('@')[0] : username,
+                email: username.includes('@') ? username : username + '@nyonibot.com',
+                plan: 'free',
+                loggedIn: true,
+                loginTime: Date.now(),
+                bots: [
+                    {
+                        id: 'demo_bot_1',
+                        name: 'Demo Discord Bot',
+                        type: 'discord',
+                        status: 'online',
+                        uptime: '1d 2h',
+                        created: new Date().toLocaleDateString()
+                    }
+                ]
+            };
+            
+            // Save to localStorage
+            localStorage.setItem('nyoni_user', JSON.stringify(userData));
+            localStorage.setItem('nyoni_token', 'token_' + Date.now());
+            
+            // Show success
+            showMessage('✅ Login successful! Redirecting...', '#10B981');
+            
+            // Redirect to dashboard
+            setTimeout(() => {
+                window.location.href = 'panel/dashboard.html';
+            }, 1500);
+        }
+        
+        function showMessage(text, color) {
+            const msg = document.getElementById('message');
+            msg.textContent = text;
+            msg.style.color = color;
+        }
+        
+        // Auto-fill demo on double click
+        document.getElementById('username').ondblclick = function() {
+            this.value = 'admin@nyonibot.com';
+            document.getElementById('password').value = 'admin123';
+        };
+    </script>
+</body>
+</html>
