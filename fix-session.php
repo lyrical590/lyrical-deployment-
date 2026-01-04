@@ -10,9 +10,9 @@ if (!file_exists(__DIR__ . '/data')) {
 // Create sessions.json with RAHEEM format
 $sessions = [
     [
-        'session_id' => 'RAHEEM-XMD~' . strtoupper(bin2hex(random_bytes(4))),
+        'session_id' => 'LYRICAL-XMD~' . strtoupper(bin2hex(random_bytes(4))),
         'user_id' => 'admin_001',
-        'token' => 'RAHEEM-' . strtoupper(bin2hex(random_bytes(4))),
+        'token' => 'LYRICAL-' . strtoupper(bin2hex(random_bytes(4))),
         'created_at' => time(),
         'expires_at' => time() + (30 * 24 * 60 * 60),
         'ip_address' => '127.0.0.1',
@@ -20,9 +20,9 @@ $sessions = [
         'active' => true
     ],
     [
-        'session_id' => 'RAHEEM-' . strtoupper(bin2hex(random_bytes(6))),
+        'session_id' => 'LYRICAL-' . strtoupper(bin2hex(random_bytes(6))),
         'user_id' => 'demo_001',
-        'token' => 'RAHEEM-XMD~' . strtoupper(bin2hex(random_bytes(3))),
+        'token' => 'LYRICAL-XMD~' . strtoupper(bin2hex(random_bytes(3))),
         'created_at' => time() - 86400,
         'expires_at' => time() + (7 * 24 * 60 * 60),
         'ip_address' => '192.168.1.100',
@@ -39,10 +39,10 @@ $users = [
     [
         'id' => 'admin_001',
         'username' => 'admin',
-        'email' => 'admin@nyonibot.com',
+        'email' => 'admin@lyricalbot.com',
         'password' => 'admin123',
         'plan' => 'pro',
-        'session_format' => 'RAHEEM-XXXXXX',
+        'session_format' => 'LYRICAL-XXXXXX',
         'created_at' => time()
     ]
 ];
@@ -57,7 +57,7 @@ $deployments = [
         'name' => 'Demo Discord Bot',
         'type' => 'discord',
         'status' => 'online',
-        'session_token' => 'RAHEEM-' . strtoupper(bin2hex(random_bytes(4))),
+        'session_token' => 'LYRICAL-' . strtoupper(bin2hex(random_bytes(4))),
         'created_at' => time()
     ]
 ];
@@ -67,10 +67,10 @@ echo "Created deployments.json\n";
 
 // Create config.json
 $config = [
-    'site_name' => 'Nyoni Bot',
-    'session_format' => 'RAHEEM',
-    'session_prefix' => 'RAHEEM-',
-    'accepts_formats' => ['RAHEEM-', 'RAHEEM-XMD~'],
+    'site_name' => 'lyricsl Bot',
+    'session_format' => 'LYRICAL',
+    'session_prefix' => 'LYRICAL-',
+    'accepts_formats' => ['LYRICAL-', 'RAHEEM-XMD~'],
     'demo_mode' => true
 ];
 
