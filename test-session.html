@@ -1,7 +1,7 @@
  <!DOCTYPE html>
 <html>
 <head>
-    <title>Test RAHEEM Sessions</title>
+    <title>Test lyrical Sessions</title>
     <style>
         body { font-family: Arial; padding: 20px; }
         .test-box { 
@@ -33,7 +33,7 @@
     </style>
 </head>
 <body>
-    <h2>🔧 Test RAHEEM Sessions</h2>
+    <h2>🔧 Test lyrical Sessions</h2>
     
     <div class="test-box">
         <h3>1. Generate RAHEEM Token</h3>
@@ -42,7 +42,7 @@
     </div>
     
     <div class="test-box">
-        <h3>2. Test Login with RAHEEM</h3>
+        <h3>2. Test Login with LYRICAL</h3>
         <input type="text" id="testEmail" placeholder="Email" value="admin@nyonibot.com">
         <input type="password" id="testPassword" placeholder="Password" value="admin123">
         <button onclick="testLogin()">Test Login</button>
@@ -66,7 +66,7 @@
     <script>
         function generateToken() {
             const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-            let token = 'RAHEEM-';
+            let token = 'LYRICAL-';
             
             for (let i = 0; i < 8; i++) {
                 token += chars.charAt(Math.floor(Math.random() * chars.length));
@@ -111,8 +111,8 @@
                     
                     // Check format
                     html += `<br><strong>Token Analysis:</strong><br>`;
-                    html += `Starts with RAHEEM-: ${data.session_token.startsWith('RAHEEM-') ? '✅' : '❌'}<br>`;
-                    html += `Starts with RAHEEM-XMD~: ${data.session_token.startsWith('RAHEEM-XMD~') ? '✅' : '❌'}<br>`;
+                    html += `Starts with LYR-: ${data.session_token.startsWith('RAHEEM-') ? '✅' : '❌'}<br>`;
+                    html += `Starts with LYRICAL-XMD~: ${data.session_token.startsWith('RAHEEM-XMD~') ? '✅' : '❌'}<br>`;
                     html += `Length: ${data.session_token.length} characters`;
                     
                     // Save to localStorage
@@ -137,9 +137,9 @@
                 html += `<br><strong>Format:</strong> `;
                 
                 if (token.startsWith('RAHEEM-')) {
-                    html += `✅ RAHEEM-XXXXXX`;
+                    html += `✅ LYRICAL-XXXXXX`;
                 } else if (token.startsWith('RAHEEM-XMD~')) {
-                    html += `✅ RAHEEM-XMD~XXXX`;
+                    html += `✅ LYRICAL-XMD~XXXX`;
                 } else {
                     html += `❌ Unknown format`;
                 }
@@ -164,8 +164,8 @@
         }
         
         function clearSession() {
-            localStorage.removeItem('raheem_session_token');
-            localStorage.removeItem('raheem_user_data');
+            localStorage.removeItem('lyrical_session_token');
+            localStorage.removeItem('lyrical_user_data');
             document.getElementById('sessionResult').innerHTML = 'Session cleared ✅';
         }
         
