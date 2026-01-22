@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lyrical Deploy | Free WhatsApp Bot Hosting</title>
+
+    <!-- Icons & Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+    <!-- Existing Styles -->
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/logo.png">
+
+    <!-- Light Matrix Overrides (SAFE) -->
+    <style>
+        body {
+            background: #f8fff9;
+            color: #0f5132;
+        }
+
+        .gradient-text {
+            color: #20c997;
+        }
+
+        .navbar {
+            background: rgba(255,255,255,0.9);
+            border-bottom: 1px solid #d1e7dd;
+        }
+
+        .hero-title,
+        .section-title {
+            font-family: 'Share Tech Mono', monospace;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: #20c997;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: #198754;
+        }
+
+        .terminal {
+            background: #ffffff;
+            border: 1px solid #d1e7dd;
+            box-shadow: 0 10px 40px rgba(32,201,151,0.15);
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        .terminal-header {
+            background: #e9f7ef;
+            color: #198754;
+        }
+
+        .terminal-success {
+            color: #198754;
+        }
+
+        .feature-card,
+        .pricing-card,
+        .deploy-form {
+            background: #ffffff;
+            border: 1px solid #d1e7dd;
+        }
+
+        footer {
+            background: #ffffff;
+            border-top: 1px solid #d1e7dd;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Background Particles -->
+<div id="particles-js"></div>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="container">
+        <div class="logo">
+            <img src="assets/images/logo.png" alt="Lyrical Deploy">
+            <div class="logo-text">
+                <h1>Lyrical Deploy</h1>
+                <p>Free WhatsApp Bot Hosting</p>
+            </div>
+        </div>
+
+        <ul class="nav-menu">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#deploy">Deploy</a></li>
+            <li><a href="panel/index.html" class="nav-btn">Panel</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section id="home" class="hero">
+    <div class="container">
+        <div class="hero-content animate__animated animate__fadeInLeft">
+            <h1 class="hero-title">
+                Deploy WhatsApp Bots<br>
+                <span class="gradient-text">The Clean Matrix Way</span>
+            </h1>
+
+            <p class="hero-subtitle">
+                Lightweight, free WhatsApp bot hosting with 24/7 uptime,
+                auto-restart, and a modern control panel.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#deploy" class="btn btn-primary btn-lg">
+                    <i class="fas fa-rocket"></i> Deploy Bot
+                </a>
+                <a href="panel/index.html" class="btn btn-secondary btn-lg">
+                    <i class="fas fa-tachometer-alt"></i> Open Panel
+                </a>
+            </div>
+        </div>
+
+        <!-- TERMINAL -->
+        <div class="hero-image animate__animated animate__fadeInRight">
+            <div class="terminal">
+                <div class="terminal-header">lyrical@deploy</div>
+                <div class="terminal-body">
+                    <p>$ npm install @whiskeysockets/baileys</p>
+                    <p class="terminal-success">✓ dependencies installed</p>
+                    <p>$ node index.js</p>
+                    <p class="terminal-success">✓ WhatsApp connected</p>
+                    <p>Status: 🟢 ONLINE</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features" class="features">
+    <div class="container">
+        <h2 class="section-title">Why Lyrical Deploy</h2>
+
+        <div class="features-grid">
+            <div class="feature-card">Instant Deployment</div>
+            <div class="feature-card">Free Forever Hosting</div>
+            <div class="feature-card">Auto Restart</div>
+            <div class="feature-card">Live Monitoring</div>
+            <div class="feature-card">Mobile Friendly</div>
+            <div class="feature-card">Node.js & Baileys Ready</div>
+        </div>
+    </div>
+</section>
+
+<!-- DEPLOY -->
+<section id="deploy" class="deploy">
+    <div class="container">
+        <h2 class="section-title">Deploy Your Bot</h2>
+
+        <div class="deploy-form">
+            <form>
+                <div class="form-group">
+                    <label>Bot Name</label>
+                    <input type="text" placeholder="MyBot" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Bot Type</label>
+                    <select required>
+                        <option>Baileys Bot</option>
+                        <option>WhatsApp Web JS</option>
+                        <option>Custom</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Bot Code (index.js)</label>
+                    <textarea rows="10" placeholder="// paste your bot code here" required></textarea>
+                </div>
+
+                <button class="btn btn-primary btn-lg btn-block">
+                    <i class="fas fa-rocket"></i> Deploy Now
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="container">
+        <p>© 2026 Lyrical Deploy — Free WhatsApp Bot Hosting</p>
+        <p>Built by Nyoni-XMD</p>
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script src="assets/js/particles.js"></script>
+<script src="script.js"></script>
+
+</body>
+          </html>
