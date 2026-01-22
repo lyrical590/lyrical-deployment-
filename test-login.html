@@ -1,68 +1,196 @@
- <!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Test Login</title>
+    <meta charset="UTF-8">
+    <title>Lyrical Deploy | Test Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        body { font-family: Arial; padding: 20px; }
-        input { display: block; margin: 10px 0; padding: 10px; width: 300px; }
-        button { padding: 10px 20px; background: #7C3AED; color: white; border: none; }
+        body {
+            font-family: Inter, sans-serif;
+            background: #f8fff9;
+            color: #0f5132;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: #ffffff;
+            border: 1px solid #d1e7dd;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(32,201,151,0.15);
+        }
+
+        h1 {
+            font-family: 'Share Tech Mono', monospace;
+            text-align: center;
+            margin-bottom: 10px;
+            color: #198754;
+        }
+
+        h2, h3 {
+            margin-top: 25px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            background: #e9f7ef;
+            border: 1px solid #20c997;
+            border-radius: 20px;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .account-box {
+            background: #f8fff9;
+            border: 1px solid #d1e7dd;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 6px;
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        .account-box p {
+            margin: 6px 0;
+        }
+
+        .actions {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        button {
+            padding: 14px 22px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: #20c997;
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background: #198754;
+        }
+
+        .btn-secondary {
+            background: #ffffff;
+            color: #198754;
+            border: 1px solid #20c997;
+        }
+
+        .btn-secondary:hover {
+            background: #e9f7ef;
+        }
+
+        .note {
+            margin-top: 20px;
+            font-size: 14px;
+            opacity: 0.85;
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 14px;
+            opacity: 0.7;
+        }
     </style>
 </head>
+
 <body>
-    <h2>Test Login Directly:</h2>
-    
-    <h3>Demo Account 1:</h3>
-    <p>Email: admin@nyonibot.com</p>
-    <p>Password: admin123</p>
-    
-    <h3>Demo Account 2:</h3>
-    <p>Email: test@example.com</p>
-    <p>Password: test123</p>
-    
-    <h3>Or create new account:</h3>
-    <p>Any email/password will work locally</p>
-    
-    <button onclick="window.location.href='panel/index.html'">
-        Go to Login Page
-    </button>
-    
-    <button onclick="directLogin()">
-        Login Automatically
-    </button>
-    
-    <script>
-        function directLogin() {
-            // Create demo user if not exists
-            if(!localStorage.getItem('nyoni_users')) {
-                localStorage.setItem('nyoni_users', JSON.stringify([
-                    {
-                        id: 'auto_user',
-                        username: 'testuser',
-                        email: 'test@test.com',
-                        password: 'test123',
-                        plan: 'free',
-                        maxBots: 5,
-                        createdAt: new Date().toISOString(),
-                        bots: []
-                    }
-                ]));
-            }
-            
-            // Auto login
-            const userData = {
-                id: 'auto_user',
-                username: 'testuser',
-                email: 'test@test.com',
-                plan: 'free',
-                loggedIn: true
-            };
-            
-            localStorage.setItem('lyrical_user', JSON.stringify(userData));
-            localStorage.setItem('lyrical_token', 'demo_token_' + Date.now());
-            
-            alert('✅ Auto-login successful!');
-            window.location.href = 'panel/dashboard.html';
+
+<div class="container">
+    <h1>Lyrical Deploy</h1>
+    <p style="text-align:center;">Local Test Login Utility</p>
+
+    <span class="badge">
+        <i class="fas fa-shield-alt"></i> Development / Demo Only
+    </span>
+
+    <h2>Demo Accounts</h2>
+
+    <div class="account-box">
+        <h3>Admin Account</h3>
+        <p>Email: admin@nyonibot.com</p>
+        <p>Password: admin123</p>
+    </div>
+
+    <div class="account-box">
+        <h3>Test Account</h3>
+        <p>Email: test@example.com</p>
+        <p>Password: test123</p>
+    </div>
+
+    <h2>Create New Account</h2>
+    <p class="note">
+        Any email and password will work locally.  
+        Accounts are stored in <code>localStorage</code>.
+    </p>
+
+    <div class="actions">
+        <button class="btn-secondary" onclick="window.location.href='panel/index.html'">
+            <i class="fas fa-sign-in-alt"></i> Go to Login Page
+        </button>
+
+        <button class="btn-primary" onclick="directLogin()">
+            <i class="fas fa-bolt"></i> Auto Login
+        </button>
+    </div>
+</div>
+
+<footer>
+    © 2026 Lyrical Deploy · Local Authentication Test
+</footer>
+
+<script>
+    function directLogin() {
+        // Create demo user if not exists
+        if (!localStorage.getItem('nyoni_users')) {
+            localStorage.setItem('nyoni_users', JSON.stringify([
+                {
+                    id: 'auto_user',
+                    username: 'testuser',
+                    email: 'test@test.com',
+                    password: 'test123',
+                    plan: 'free',
+                    maxBots: 5,
+                    createdAt: new Date().toISOString(),
+                    bots: []
+                }
+            ]));
         }
-    </script>
+
+        // Auto login
+        const userData = {
+            id: 'auto_user',
+            username: 'testuser',
+            email: 'test@test.com',
+            plan: 'free',
+            loggedIn: true
+        };
+
+        localStorage.setItem('lyrical_user', JSON.stringify(userData));
+        localStorage.setItem('lyrical_token', 'demo_token_' + Date.now());
+
+        alert('✅ Auto-login successful!');
+        window.location.href = 'panel/dashboard.html';
+    }
+</script>
+
 </body>
 </html>
